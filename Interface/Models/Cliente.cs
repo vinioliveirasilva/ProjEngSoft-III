@@ -53,11 +53,11 @@ namespace Interface.Models
             ClienteTelSec = telSec;
         }
 
-        public ActionResult AddPedido(List<Item> items = null)
+        public ActionResult AddPedido(List<Item> itens = null)
         {
             try
             {
-                ClientePedidos.Add(new Pedido(items));
+                ClientePedidos.Add(new Pedido(itens));
             }
             catch (Exception ex)
             {

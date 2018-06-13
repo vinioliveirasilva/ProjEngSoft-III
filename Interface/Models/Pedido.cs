@@ -28,12 +28,10 @@ namespace Interface.Models
          */
 
 
-        public Pedido(List<Item> items, string creationId)
+        public Pedido(List<Item> itens)
         {
-            CreationId = creationId;
-
-            if (items != null)
-                PedidoItens = items;
+            if (itens.Any())
+                PedidoItens = itens;
         }
 
         public int GetPedidoId() => PedidoId;

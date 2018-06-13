@@ -26,9 +26,9 @@ namespace Interface.Models
          * Metodos da classe
          */
 
-        public Expedicao(List<Item> itens,int pedidoId, string creationId)
+        public Expedicao(List<Item> itens, int pedidoId, string creationId)
         {
-            if (itens != null)
+            if (itens.Any())
                 ExpedicaoItens = itens;
             PedidoId = pedidoId;
             CreationId = creationId;

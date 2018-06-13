@@ -26,8 +26,10 @@ namespace Interface.Models
          * Metodos da classe
          */
 
-        public Fabricacao(int pedidoId, string creationId)
+        public Fabricacao(List<Item> itens, int pedidoId, string creationId)
         {
+            if (itens.Any())
+                FabricacaoItens = itens;
             PedidoId = pedidoId;
             CreationId = creationId;
             FabricacaoStatus = FabricacaoStatus.NaoIniciado;

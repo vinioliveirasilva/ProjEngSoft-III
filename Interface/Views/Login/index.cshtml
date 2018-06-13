@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Response.Cookies["Authorization"].Value = "123";//ViewBag.Token;
+    Response.Cookies["Authorization"].Expires = DateTime.Now.AddSeconds(60);
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+
+
+
+    </div>
+</body>
+</html>

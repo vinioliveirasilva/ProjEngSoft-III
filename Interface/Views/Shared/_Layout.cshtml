@@ -13,6 +13,7 @@
             font-family: Arial, Helvetica, sans-serif;
             padding: 0px;
         }
+
         .footer {
             position: fixed;
             left: 0;
@@ -102,7 +103,6 @@
             width: auto; /* Could be more or less, depending on screen size */
             min-width: 100px;
             max-width: 350px;
-
         }
 
         /* The Close Button (x) */
@@ -161,19 +161,26 @@
     </style>
 
 </head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
 
     <!-- example 1 - using absolute position for center -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand abs" href="#">Home</a>
+        <a class="navbar-brand abs" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse collapse" id="collapsingNavbar">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">                    
-                    <button onclick="document.getElementById('LoginModal').style.display='block'" style="color:white; text-decoration:none;" data-target="#collapsingNavbar" data-toggle="collapse" class="btn btn-link">Login</button>
+                <li class="nav-item">
+                    @{                         
+                        if (Request.Cookies.Count > 0 && Request.Cookies["Authorization"].Value == "123"){
+                            <button onclick="window.location.href='@Url.Action("Index", "Home")'" style="color:white; text-decoration:none;" data-target="#collapsingNavbar" data-toggle="collapse" class="btn btn-link">Logout</button>
+                        }
+                        else{
+                            <button onclick="document.getElementById('LoginModal').style.display='block'" style="color:white; text-decoration:none;" data-target="#collapsingNavbar" data-toggle="collapse" class="btn btn-link">Login</button>
+                        }
+                    }
                 </li>
             </ul>
         </div>
@@ -182,25 +189,24 @@
 
 
     <div id="LoginModal" class="modal">
-
-        <form class="modal-content animate" action="/action_page.php">
+        @using (Html.BeginForm("Index", "Login", new {}, FormMethod.Post, new { @class = "modal-content animate" }))
+        {
             <div class="imgcontainer">
                 <span onclick="document.getElementById('LoginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
-                <img src="img_avatar2.png" alt="Avatar" class="avatar">
             </div>
 
             <div class="container-login">
                 <center>
-                    <label for="uname"><b>Username</b></label>
-                    <input type="number" placeholder="Digite o CPF..." name="uname" required>
+                    <label for="client"><b>CPF</b></label>
+                    <input type="number" placeholder="Digite o CPF..." name="cpf" required>
                     <br />
 
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Digite a senha..." name="psw" required>
+                    <label for="senha"><b>Senha</b></label>
+                    <input type="password" placeholder="Digite a senha..." name="senha" required>
                 </center>
 
                 <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                    <input type="checkbox" checked="checked" name="remember"> Lembrar meus dados?
                 </label>
                 <button type="submit" class="button-login-form">Login</button>
 
@@ -208,33 +214,32 @@
 
             <div class="container-login" style="background-color:#f1f1f1">
                 <button type="button" onclick="document.getElementById('LoginModal').style.display='none'" class="button-login-form cancelbtn">Cancel</button>
-                <span class="psw">Forgot <a href="#">password?</a></span>
             </div>
-        </form>
+    }
     </div>
+    
+        <script>
+            // Get the modal
+            var modal = document.getElementById('LoginModal');
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById('LoginModal');
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
             }
-        }
-    </script>
+        </script>
 
-    <div class="container body-content">
-        @RenderBody()
-        <footer class="footer">
-            <hr />
-            <p>&copy; Copyright @DateTime.Now.Year - MakerBar Ltda </p>
-        </footer>
-    </div>
+        <div class="container body-content">
+            @RenderBody()
+            <footer class="footer">
+                <hr />
+                <p>&copy; Copyright @DateTime.Now.Year - MakerBar Ltda </p>
+            </footer>
+        </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-    </html>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

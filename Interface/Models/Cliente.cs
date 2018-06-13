@@ -71,7 +71,7 @@ namespace Interface.Models
         {
             try
             {
-                var pedido = ClientePedidos.Where(x => x.GetId() == id).FirstOrDefault();
+                var pedido = ClientePedidos.Where(x => x.GetPedidoId() == id).FirstOrDefault(null);
 
                 if (pedido != null)
                     ClientePedidos.Remove(pedido);
